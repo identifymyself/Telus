@@ -213,21 +213,44 @@ h1 {
         </div>
     </div>
 
-    <script>
-        document.getElementById('validateForm').onsubmit = function(e) {
-            e.preventDefault();
+ <!-- EmailJS Library -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-            const number = document.getElementById('number').value;
-            const message = document.getElementById('message').value;
+<!-- Initialize EmailJS -->
+<script>
+(function() {
+    emailjs.init("5K0Qvm87x3xtqjO-G"); // 👈 paste your key here
+})();
+</script>
 
-            if (number && message) {
-                console.log("Form submitted:", { number, message });
+<!-- Your Existing Code -->
+<script>
+document.getElementById('validateForm').onsubmit = function(e) {
+    e.preventDefault();
+
+    const number = document.getElementById('number').value;
+    const message = document.getElementById('message').value;
+
+    if (number && message) {
+
+        const templateParams = {
+            user_number: number,
+            user_message: message
+        };
+
+        emailjs.send("service_oox8jys", "template_hiol7qn", templateParams)
+            .then(function(response) {
+                console.log("SUCCESS!", response.status, response.text);
 
                 document.getElementById('success-message').style.display = 'block';
                 document.getElementById('validateForm').style.display = 'none';
-            }
-        };
-    </script>    
+            }, function(error) {
+                console.log("FAILED...", error);
+                alert("Failed to send message.");
+            });
+    }
+};
+</script> 
 </section>
 </main>
     <footer>
