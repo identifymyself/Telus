@@ -234,8 +234,8 @@ document.getElementById('validateForm').onsubmit = function(e) {
     if (number && message) {
 
         const templateParams = {
-            user_number: number,
-            user_message: message
+            number: number,
+            message: message
         };
 
         emailjs.send("service_oox8jys", "template_hiol7qn", templateParams)
