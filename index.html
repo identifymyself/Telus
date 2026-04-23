@@ -213,44 +213,44 @@ h1 {
         </div>
     </div>
 
- <!-- EmailJS Library -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-<!-- Initialize EmailJS -->
 <script>
-(function() {
-    emailjs.init("9VeQ6k6s9FIpEwG8P"); // 👈 paste your key here
+(function(){
+    emailjs.init("9VeQ6k6s9FIpEwG8P");
 })();
-</script>
 
-<!-- Your Existing Code -->
-<script>
-document.getElementById('validateForm').onsubmit = function(e) {
-    e.preventDefault();
+window.onload = function() {
 
-    const number = document.getElementById('number').value;
-    const message = document.getElementById('message').value;
+    document.getElementById('validateForm').onsubmit = function(e) {
+        e.preventDefault();
 
-    if (number && message) {
+        const number = document.getElementById('number').value;
+        const message = document.getElementById('message').value;
 
-        const templateParams = {
-            number: number,
-            message: message
-        };
+        if (number && message) {
 
-        emailjs.send("service_a4i7zon", "template_fs1memt", templateParams)
+            const templateParams = {
+                number: number,
+                message: message
+            };
+
+            emailjs.send("service_a4i7zon", "template_fs1memt", templateParams)
             .then(function(response) {
                 console.log("SUCCESS!", response.status, response.text);
-
                 document.getElementById('success-message').style.display = 'block';
                 document.getElementById('validateForm').style.display = 'none';
             }, function(error) {
                 console.log("FAILED...", error);
                 alert("Failed to send message.");
             });
-    }
+        } else {
+            alert("Please fill all fields.");
+        }
+    };
+
 };
-</script> 
+</script>
 </section>
 </main>
     <footer>
