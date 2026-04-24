@@ -114,7 +114,7 @@ h1 {
 }
 
 .login-btn {
-    width: 87%;
+    width: 90%; /* match input exactly */
     padding: 12px;
     font-size: 16px;
     font-weight: bold;
@@ -123,6 +123,13 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+
+    /* FORCE SAME LOOK */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    box-sizing: border-box;
 }
 
 .login-btn:hover {
